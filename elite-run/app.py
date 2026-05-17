@@ -6,10 +6,12 @@ Visit:     http://localhost:5000
 """
 
 from flask import Flask, request, jsonify, render_template, abort
+from flask_cors import CORS
 import sqlite3
 from datetime import datetime
 
 app = Flask(__name__)
+CORS(app)
 DB_PATH = "database.db"
 
 
@@ -92,22 +94,22 @@ def seed_db():
 
     if c.execute("SELECT COUNT(*) FROM events").fetchone()[0] == 0:
         events = [
-            ("Sunrise Coastal 10K",    "2025-07-18", "06:00 AM", "Marine Drive Promenade, Mumbai",
+            ("Sunrise Coastal 10K",    "2026-07-18", "06:00 AM", "Marine Drive Promenade, Mumbai",
              "Catch the first light over the bay with a flat, fast 10K loop. Pacers available for every group.",
              "10 KM", "moderate", 40, ""),
-            ("Park Tempo Tuesdays",    "2025-07-21", "06:30 PM", "Greenfield Park, North Gate",
+            ("Park Tempo Tuesdays",    "2026-07-21", "06:30 PM", "Greenfield Park, North Gate",
              "Weekly community 5K. Beginner-friendly. Stick around for stretch + coffee.",
              "5 KM", "easy", 88, ""),
-            ("Hill Crusher Half",      "2025-08-08", "06:30 AM", "Ridgeview Trailhead",
+            ("Hill Crusher Half",      "2026-08-08", "06:30 AM", "Ridgeview Trailhead",
              "A challenging half-marathon through three signature climbs. Hydration every 3K.",
              "21.1 KM", "hard", 17, ""),
-            ("Night Stride Neon 8K",   "2025-08-15", "08:00 PM", "Central Boulevard Loop",
+            ("Night Stride Neon 8K",   "2026-08-15", "08:00 PM", "Central Boulevard Loop",
              "Glow-in-the-dark community run. Free LED bands for first 100 runners.",
              "8 KM", "moderate", 33, ""),
-            ("Dawn Half Marathon",     "2025-09-03", "06:00 AM", "Lucknow Heritage Route",
+            ("Dawn Half Marathon",     "2026-09-03", "06:00 AM", "Lucknow Heritage Route",
              "An early morning 21 km run through the city's heritage routes. Medals for all finishers.",
              "21.1 KM", "hard", 60, ""),
-            ("Elite Endurance Camp",   "2025-09-20", "07:00 AM", "Jim Corbett, Uttarakhand",
+            ("Elite Endurance Camp",   "2026-09-20", "07:00 AM", "Jim Corbett, Uttarakhand",
              "A two-day residential training camp. Coaching, nutrition sessions, and trail runs included.",
              "Variable", "hard", 25, ""),
         ]
