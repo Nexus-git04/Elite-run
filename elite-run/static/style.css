@@ -83,19 +83,14 @@ nav {
   height: 64px;
 }
 
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  text-decoration: none;
-  color: var(--black);
+.nav-logo-img {
+  height: 44px;
+  width: 44px;
+  object-fit: cover;
+  border-radius: 50%;
 }
-.nav-logo span {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: 0.09em;
-}
+
+.nav-logo { gap: 0; }
 
 .nav-links { display: flex; align-items: center; gap: 34px; }
 .nav-links a {
