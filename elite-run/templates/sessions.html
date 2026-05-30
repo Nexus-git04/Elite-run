@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Club Sessions — Elite Run</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--black);
+      padding: 80px var(--pad) 100px;
+    }
+    .page-hero-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .page-hero-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(64px, 9vw, 110px);
+      line-height: 0.90; letter-spacing: -0.01em;
+      text-transform: uppercase; color: #fff;
+      margin-bottom: 24px;
+    }
+    .page-hero-heading span { color: var(--red); }
+    .hero-stats-row {
+      display: flex; gap: 0;
+      border: 1px solid #1c1c1c; border-radius: 3px;
+      overflow: hidden; max-width: 700px; margin-top: 48px;
+    }
+    .hero-stat {
+      flex: 1; padding: 24px 28px;
+      border-right: 1px solid #1c1c1c;
+      background: #0a0a0a;
+    }
+    .hero-stat:last-child { border-right: none; }
+    .hero-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 44px; color: var(--red); line-height: 1; margin-bottom: 4px;
+    }
+    .hero-stat-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; color: #444; text-transform: uppercase;
+    }
+
+    /* ── SEASON 1 ── */
+    .season-section { padding: 100px var(--pad); background: var(--bg); }
+    .season-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: end; margin-bottom: 64px;
+    }
+    .season-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 140px; line-height: 0.85;
+      color: var(--border); letter-spacing: -0.04em; margin-bottom: 8px;
+    }
+    .season-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(40px,5vw,62px);
+      line-height: 0.95; margin-bottom: 12px;
+    }
+    .season-dates {
+      font-size: 13px; color: var(--muted);
+      font-weight: 600; letter-spacing: 0.05em;
+    }
+    .season-desc {
+      font-size: 17px; color: var(--muted);
+      line-height: 1.7; max-width: 480px;
+    }
+
+    /* ── SESSION MILESTONES ── */
+    .milestones-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 3px;
+      overflow: hidden; margin-bottom: 48px;
+    }
+    .milestone {
+      background: var(--white); padding: 28px 24px;
+    }
+    .milestone-week {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.12em; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .milestone-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 48px; color: var(--red); line-height: 1; margin-bottom: 4px;
+    }
+    .milestone-label { font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .milestone-date { font-size: 11px; color: var(--border); margin-top: 6px; font-weight: 600; }
+
+    /* ── GROWTH BAR ── */
+    .growth-bar-section {
+      background: var(--white); padding: 80px var(--pad);
+      border-top: 1px solid var(--border);
+    }
+    .growth-bar-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(32px,4vw,50px);
+      line-height: 1; margin-bottom: 48px;
+    }
+    .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+    .bar-row { display: flex; align-items: center; gap: 16px; }
+    .bar-label {
+      width: 60px; font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); flex-shrink: 0;
+    }
+    .bar-track {
+      flex: 1; height: 36px; background: var(--bg);
+      border-radius: 3px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; background: var(--red);
+      border-radius: 3px; display: flex; align-items: center;
+      padding: 0 12px; transition: width 1s ease;
+    }
+    .bar-fill span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 16px; color: #fff; white-space: nowrap;
+    }
+
+    /* ── HIGHLIGHT SESSIONS ── */
+    .highlights-section { padding: 100px var(--pad); background: var(--bg); }
+    .highlights-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(36px,4.5vw,56px);
+      line-height: 1; margin-bottom: 48px;
+    }
+    .session-card {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border: 1px solid var(--border); border-radius: 3px;
+      overflow: hidden; margin-bottom: 24px; background: var(--white);
+    }
+    .session-card-img {
+      background: var(--border); min-height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px;
+    }
+    .session-card-img svg { width: 36px; height: 36px; opacity: 0.2; }
+    .session-card-img-text {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); opacity: 0.5;
+    }
+    .session-card-body { padding: 36px; display: flex; flex-direction: column; justify-content: center; }
+    .session-card-tag {
+      display: inline-block; margin-bottom: 14px;
+      padding: 4px 10px; border-radius: 3px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: #EAF0FB; color: #2B4A8C; width: fit-content;
+    }
+    .session-card-date {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em;
+      color: var(--red); text-transform: uppercase; margin-bottom: 8px;
+    }
+    .session-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 32px; line-height: 1; margin-bottom: 12px;
+    }
+    .session-card-body-text { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
+    /* ── SEASON 2 ── */
+    .season2-section {
+      background: var(--red); padding: 100px var(--pad);
+    }
+    .season2-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .season2-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .season2-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(48px,6vw,80px);
+      line-height: 0.92; color: #fff; margin-bottom: 24px;
+    }
+    .season2-body { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+    .session2-cards { display: flex; flex-direction: column; gap: 16px; }
+    .session2-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 3px; padding: 24px;
+    }
+    .session2-card-date {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .session2-card-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 26px; color: #fff; line-height: 1; margin-bottom: 8px;
+    }
+    .session2-card-body { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+    /* ── JOIN ── */
+    .join-section {
+      background: var(--black); padding: 100px var(--pad);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .join-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(48px,6vw,80px);
+      line-height: 0.92; color: #fff; margin-bottom: 20px;
+    }
+    .join-heading span { color: var(--red); }
+    .join-body { font-size: 16px; color: #555; line-height: 1.7; margin-bottom: 32px; }
+    .join-details { display: flex; flex-direction: column; gap: 14px; }
+    .join-detail {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 15px; color: #666;
+    }
+    .join-detail-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: #1a1a1a; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--red);
+    }
+    .join-detail-icon svg { width: 16px; height: 16px; }
+
+    @media (max-width: 1024px) {
+      .season-header { grid-template-columns: 1fr; gap: 24px; }
+      .milestones-grid { grid-template-columns: repeat(2,1fr); }
+      .session-card { grid-template-columns: 1fr; }
+      .session-card-img { min-height: 200px; }
+      .season2-inner { grid-template-columns: 1fr; gap: 40px; }
+      .join-section { grid-template-columns: 1fr; gap: 40px; }
+      .hero-stats-row { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .season-section, .highlights-section { padding: 64px var(--pad); }
+      .milestones-grid { grid-template-columns: 1fr 1fr; }
+      .hero-stats-row { flex-wrap: wrap; }
+      .hero-stat { flex: 1 1 40%; }
+      .season-num { font-size: 90px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/events">Events</a>
+      <a href="/story">Our Story</a>
+      <a href="/community">Community</a>
+      <a href="/sessions" class="red">Club Sessions</a>
+      <a href="/#interns">Interns</a>
+      <a href="/#contact">Contact</a>
+      <a href="/events" class="btn btn-red">Join a Run</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/events"    onclick="closeMobileNav()">Events</a>
+    <a href="/story"     onclick="closeMobileNav()">Our Story</a>
+    <a href="/community" onclick="closeMobileNav()">Community</a>
+    <a href="/sessions"  onclick="closeMobileNav()">Club Sessions</a>
+    <a href="/#interns"  onclick="closeMobileNav()">Interns</a>
+    <a href="/#contact"  onclick="closeMobileNav()">Contact</a>
+    <a href="/events"    onclick="closeMobileNav()" class="btn btn-red" style="width:fit-content">Join a Run</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-label">Club Sessions</div>
+    <h1 class="page-hero-heading">WEEK BY<br><span>WEEK.</span></h1>
+    <div class="hero-stats-row">
+      <div class="hero-stat"><div class="hero-stat-num">2</div><div class="hero-stat-label">Seasons</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">15+</div><div class="hero-stat-label">Sessions</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">6→103</div><div class="hero-stat-label">Runners Growth</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">Weekly</div><div class="hero-stat-label">Cadence</div></div>
+    </div>
+  </section>
+
+  <!-- SEASON 1 -->
+  <section class="season-section">
+    <div class="season-header">
+      <div>
+        <div class="season-num">S1</div>
+        <div class="section-label">Season 1</div>
+        <h2 class="season-title">THE FOUNDATION</h2>
+        <div class="season-dates">22 September 2024 — 18 May 2025</div>
+      </div>
+      <div>
+        <p class="season-desc">
+          Season 1 was where everything took shape. Starting with just 6 runners at Botanical Garden,
+          the club ran every week and built something real — a weekly ritual, a growing community,
+          and by Week 15, a turnout of 103 participants that no one had quite expected.
+        </p>
+      </div>
+    </div>
+
+    <div class="milestones-grid">
+      <div class="milestone">
+        <div class="milestone-week">Week 1</div>
+        <div class="milestone-num">6</div>
+        <div class="milestone-label">Runners at Botanical Garden</div>
+        <div class="milestone-date">22 Sep 2024</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone-week">Season</div>
+        <div class="milestone-num">15</div>
+        <div class="milestone-label">Total Sessions Completed</div>
+        <div class="milestone-date">Sep 2024 — May 2025</div>
+      </div>
+      <div class="milestone">
+        <div class="milestone-week">Week 15</div>
+        <div class="milestone-num">103</div>
+        <div class="milestone-label">Runners — Final Session</div>
+        <div class="milestone-date">18 May 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROWTH BAR CHART -->
+  <section class="growth-bar-section">
+    <div class="section-label">Season 1 Growth</div>
+    <h2 class="growth-bar-heading">FROM 6 TO 103 — ONE WEEK AT A TIME</h2>
+    <div class="bar-chart">
+      <div class="bar-row">
+        <div class="bar-label">Wk 1</div>
+        <div class="bar-track"><div class="bar-fill" style="width:6%"><span>6</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wk 3</div>
+        <div class="bar-track"><div class="bar-fill" style="width:15%"><span>~15</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wk 5</div>
+        <div class="bar-track"><div class="bar-fill" style="width:25%"><span>~25</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wk 7</div>
+        <div class="bar-track"><div class="bar-fill" style="width:38%"><span>~38</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wk 10</div>
+        <div class="bar-track"><div class="bar-fill" style="width:58%"><span>~60</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wk 13</div>
+        <div class="bar-track"><div class="bar-fill" style="width:78%"><span>~80</span></div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label">Wk 15</div>
+        <div class="bar-track"><div class="bar-fill" style="width:100%"><span>103</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHT SESSIONS -->
+  <section class="highlights-section">
+    <div class="section-label">Standout Sessions</div>
+    <h2 class="highlights-heading">SESSIONS THAT STOOD OUT</h2>
+
+    <div class="session-card">
+      <div class="session-card-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+        <div class="session-card-img-text">Session Photos</div>
+      </div>
+      <div class="session-card-body">
+        <div class="session-card-tag">Season 1 · Opening</div>
+        <div class="session-card-date">13 July 2025 · Janeshwar Mishra Park, Gate 7</div>
+        <div class="session-card-title">THE FIRST SESSION</div>
+        <p class="session-card-body-text">
+          The opening session of Club Season 1 marked the beginning of Elite's regular community runs,
+          bringing together participants for a more consistent and interactive running environment.
+          The format that would define the club's weekly culture was set right here.
+        </p>
+      </div>
+    </div>
+
+    <div class="session-card">
+      <div class="session-card-img" style="background: #1a1a1a;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:#fff">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+        <div class="session-card-img-text" style="color:#555">Session Photos</div>
+      </div>
+      <div class="session-card-body">
+        <div class="session-card-tag">Season 1 · Best Session</div>
+        <div class="session-card-date">31 August 2025 · YOLO Sports Arena</div>
+        <div class="session-card-title">THE YOLO SESSION</div>
+        <p class="session-card-body-text">
+          One of the most memorable sessions of Season 1 — hosted at YOLO Sports Arena and followed
+          by an exclusive basketball session, reflecting Elite's growing interest in building a wider
+          youth sports culture beyond traditional running formats.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASON 2 -->
+  <section class="season2-section">
+    <div class="season2-inner">
+      <div>
+        <div class="season2-label">Currently Running</div>
+        <h2 class="season2-heading">SEASON 2<br>IS HERE.</h2>
+        <p class="season2-body">
+          Season 2 builds on everything Season 1 established. More sessions, more locations,
+          and a community that now knows what it means to show up every week.
+          The sessions continue — and the doors are open.
+        </p>
+      </div>
+      <div class="session2-cards">
+        <div class="session2-card">
+          <div class="session2-card-date">Season 2 · Opening</div>
+          <div class="session2-card-title">SEASON 2 KICKS OFF</div>
+          <p class="session2-card-body">New season, same commitment. The weekly runs continue with renewed energy and a growing roster of regulars.</p>
+        </div>
+        <div class="session2-card">
+          <div class="session2-card-date">Every Week</div>
+          <div class="session2-card-title">WEEKLY COMMUNITY RUNS</div>
+          <p class="session2-card-body">Open to all levels. Show up, find your pace, and run with a community that has your back.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section class="join-section">
+    <div>
+      <h2 class="join-heading">JOIN THE<br><span>NEXT RUN.</span></h2>
+      <p class="join-body">
+        No experience required. No entry fee. Just show up at the next session and run
+        with a community that started with 6 and never stopped growing.
+      </p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;">
+        <a href="/events" class="btn btn-red">See Upcoming Runs</a>
+        <a href="/#interns" class="btn btn-outline" style="color:#fff;border-color:#333;">Apply as Intern</a>
+      </div>
+    </div>
+    <div class="join-details">
+      <div class="join-detail">
+        <div class="join-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+        </div>
+        Weekly sessions every Sunday morning
+      </div>
+      <div class="join-detail">
+        <div class="join-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+        </div>
+        Rotating venues across Lucknow
+      </div>
+      <div class="join-detail">
+        <div class="join-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          </svg>
+        </div>
+        Open to all paces and experience levels
+      </div>
+      <div class="join-detail">
+        <div class="join-detail-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+          </svg>
+        </div>
+        Free to join — no registration fee
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <a href="/" class="footer-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="footer-copy">© 2026 All rights reserved.</div>
+    <div class="footer-tagline">Run Together.</div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+    });
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  </script>
+</body>
+</html>

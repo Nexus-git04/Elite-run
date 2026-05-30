@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community — Elite Run</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    .page-hero {
+      background: var(--bg);
+      padding: 80px var(--pad);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: end;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      color: var(--red); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .page-hero-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(56px, 8vw, 100px);
+      line-height: 0.90; letter-spacing: -0.01em; text-transform: uppercase;
+    }
+    .page-hero-heading span { color: var(--red); }
+    .page-hero-sub {
+      font-size: 19px; color: var(--muted);
+      line-height: 1.65; max-width: 440px;
+      border-left: 3px solid var(--red); padding-left: 20px;
+    }
+
+    /* ── INITIATIVE CARDS ── */
+    .initiatives-section { padding: 100px var(--pad); background: var(--white); }
+    .initiatives-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(36px,4.5vw,56px);
+      line-height: 1; margin-bottom: 52px;
+    }
+    .initiative-row {
+      display: grid; grid-template-columns: 200px 1fr;
+      gap: 52px; align-items: start;
+      padding: 48px 0; border-top: 1px solid var(--border);
+    }
+    .initiative-row:last-child { border-bottom: 1px solid var(--border); }
+    .initiative-date {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .initiative-location { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .initiative-tag {
+      display: inline-block; margin-top: 14px;
+      padding: 4px 10px; border-radius: 3px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .tag-ngo      { background: #E6F4E6; color: #2a7a2a; }
+    .tag-sports   { background: #EAF0FB; color: #2B4A8C; }
+    .tag-community{ background: #FFF3E0; color: #a04800; }
+    .tag-outreach { background: #F3E8FF; color: #6B21A8; }
+
+    .initiative-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(28px,3.5vw,42px);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .initiative-body {
+      font-size: 16px; color: var(--muted);
+      line-height: 1.75; max-width: 600px; margin-bottom: 24px;
+    }
+    .initiative-img {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--border); border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 8px; margin-top: 24px;
+    }
+    .initiative-img svg { width: 32px; height: 32px; opacity: 0.2; }
+    .initiative-img-text {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); opacity: 0.5;
+    }
+    .collab-with {
+      font-size: 13px; font-weight: 600; color: var(--muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .collab-with span {
+      font-weight: 700; color: var(--black);
+    }
+
+    /* ── PICKLEBALL FEATURE ── */
+    .pickle-section {
+      background: var(--black); padding: 100px var(--pad);
+    }
+    .pickle-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: start;
+    }
+    .pickle-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .pickle-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(48px,6vw,78px);
+      line-height: 0.92; color: #fff; margin-bottom: 24px;
+    }
+    .pickle-heading span { color: var(--red); }
+    .pickle-date {
+      font-size: 13px; color: #555; margin-bottom: 24px;
+    }
+    .pickle-body { font-size: 16px; color: #666; line-height: 1.75; margin-bottom: 28px; }
+    .pickle-quote {
+      border-left: 3px solid var(--red);
+      padding-left: 20px;
+      font-size: 18px; font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6; font-style: italic;
+      margin-bottom: 28px;
+    }
+    .pickle-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: #1c1c1c; border-radius: 4px; overflow: hidden;
+    }
+    .pickle-stat { background: #111; padding: 28px 24px; }
+    .pickle-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 48px; color: var(--red); line-height: 1; margin-bottom: 6px;
+    }
+    .pickle-stat-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.12em; color: #444; text-transform: uppercase;
+    }
+    .pickle-img {
+      width: 100%; aspect-ratio: 4/5;
+      background: #1a1a1a; border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+    }
+    .pickle-img svg { width: 40px; height: 40px; opacity: 0.15; color: #fff; }
+    .pickle-img-text {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; color: #333;
+    }
+
+    /* ── CTA ── */
+    .cta-banner {
+      background: var(--red); padding: 72px var(--pad);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 40px;
+    }
+    .cta-banner-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(36px,4vw,54px); color: #fff; line-height: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .page-hero { grid-template-columns: 1fr; gap: 32px; }
+      .pickle-inner { grid-template-columns: 1fr; gap: 40px; }
+      .initiative-row { grid-template-columns: 1fr; gap: 24px; }
+      .cta-banner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 768px) {
+      .initiatives-section, .pickle-section { padding: 64px var(--pad); }
+      .pickle-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/events">Events</a>
+      <a href="/story">Our Story</a>
+      <a href="/community" class="red">Community</a>
+      <a href="/sessions">Club Sessions</a>
+      <a href="/#interns">Interns</a>
+      <a href="/#contact">Contact</a>
+      <a href="/events" class="btn btn-red">Join a Run</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/events"    onclick="closeMobileNav()">Events</a>
+    <a href="/story"     onclick="closeMobileNav()">Our Story</a>
+    <a href="/community" onclick="closeMobileNav()">Community</a>
+    <a href="/sessions"  onclick="closeMobileNav()">Club Sessions</a>
+    <a href="/#interns"  onclick="closeMobileNav()">Interns</a>
+    <a href="/#contact"  onclick="closeMobileNav()">Contact</a>
+    <a href="/events"    onclick="closeMobileNav()" class="btn btn-red" style="width:fit-content">Join a Run</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div>
+      <div class="page-hero-label">Community</div>
+      <h1 class="page-hero-heading">BEYOND<br>THE <span>RUN.</span></h1>
+    </div>
+    <div>
+      <p class="page-hero-sub">
+        Running is just the start. Elite Run Club has always believed that a movement-led
+        community has the power to do more than cover distance.
+      </p>
+    </div>
+  </section>
+
+  <!-- INITIATIVES -->
+  <section class="initiatives-section">
+    <div class="section-label">Social Outreach</div>
+    <h2 class="initiatives-heading">GIVING BACK TO THE CITY</h2>
+
+    <!-- INAAM NGO -->
+    <div class="initiative-row">
+      <div class="initiative-sidebar">
+        <div class="initiative-date">27 April 2025</div>
+        <div class="initiative-location">Hanuman Setu<br>Lucknow</div>
+        <div class="initiative-tag tag-ngo">NGO Collab</div>
+      </div>
+      <div class="initiative-content">
+        <div class="collab-with">In collaboration with <span>INAAM NGO</span></div>
+        <h3 class="initiative-title">FOOD DISTRIBUTION DRIVE</h3>
+        <p class="initiative-body">
+          Members of Elite Run Club organised a food distribution drive near Hanuman Setu,
+          distributing food boxes to people in need. INAAM NGO, a student-led organisation,
+          partnered with the club as part of Elite's growing community outreach efforts across Lucknow.
+        </p>
+        <div class="initiative-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="initiative-img-text">Event Photos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MUSKAAN FOUNDATION -->
+    <div class="initiative-row">
+      <div class="initiative-sidebar">
+        <div class="initiative-date">19 May 2025</div>
+        <div class="initiative-location">Primary School<br>Lucknow</div>
+        <div class="initiative-tag tag-outreach">Education</div>
+      </div>
+      <div class="initiative-content">
+        <div class="collab-with">In collaboration with <span>Muskaan Foundation</span></div>
+        <h3 class="initiative-title">SCHOOL COMMUNITY VISIT</h3>
+        <p class="initiative-body">
+          Elite partnered with Muskaan Foundation for a community visit to a primary school,
+          where volunteers distributed stationery, food items, and conducted recreational field
+          activities for children — bringing movement and joy to the classroom.
+        </p>
+        <div class="initiative-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="initiative-img-text">Event Photos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMUNITY BHANDARA -->
+    <div class="initiative-row">
+      <div class="initiative-sidebar">
+        <div class="initiative-date">31 May 2025</div>
+        <div class="initiative-location">Parivartan Chowk<br>Lucknow</div>
+        <div class="initiative-tag tag-community">Community</div>
+      </div>
+      <div class="initiative-content">
+        <div class="collab-with" style="visibility:hidden;">placeholder</div>
+        <h3 class="initiative-title">COMMUNITY BHANDARA</h3>
+        <p class="initiative-body">
+          Elite Run Club organised a large-scale community bhandara at Parivartan Chowk,
+          where nearly 1,000 people gathered as part of a collective food service initiative —
+          one of the club's largest community events to date.
+        </p>
+        <div class="initiative-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="initiative-img-text">Event Photos</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIDNIGHT BULLETIN -->
+    <div class="initiative-row">
+      <div class="initiative-sidebar">
+        <div class="initiative-date">2 June 2025</div>
+        <div class="initiative-location">Paul Mercy Home<br>Lucknow</div>
+        <div class="initiative-tag tag-outreach">Outreach</div>
+      </div>
+      <div class="initiative-content">
+        <div class="collab-with">In collaboration with <span>The Midnight Bulletin</span></div>
+        <h3 class="initiative-title">VISIT TO PAUL MERCY HOME</h3>
+        <p class="initiative-body">
+          In collaboration with The Midnight Bulletin, a student-led organisation, club members
+          visited Paul Mercy Home — an old age home in Lucknow. The visit included finger painting
+          sessions, interactive activities, and the distribution of goodies and essentials among residents.
+        </p>
+        <div class="initiative-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="initiative-img-text">Event Photos</div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- PICKLEBALL FEATURE -->
+  <section class="pickle-section">
+    <div class="pickle-inner">
+      <div>
+        <div class="pickle-label">A Special Chapter</div>
+        <h2 class="pickle-heading">THE PICKLEBALL<br><span>DETOUR.</span></h2>
+        <div class="pickle-date">28 December 2025 · Pickleball Café, Mill Road · In collab with Athrise India</div>
+        <p class="pickle-body">
+          Not every story we tell is measured in kilometres. The Pickleball Tournament was
+          Elite's first fully curated sporting event outside the running ecosystem — a deliberate
+          departure designed as an experiment in movement, community, and play.
+        </p>
+        <p class="pickle-quote">
+          "Not every initiative becomes a tradition. Some exist to shift perspective. This was one of those."
+        </p>
+        <div class="pickle-stats">
+          <div class="pickle-stat"><div class="pickle-stat-num">1st</div><div class="pickle-stat-label">Non-Running Event</div></div>
+          <div class="pickle-stat"><div class="pickle-stat-num">Open</div><div class="pickle-stat-label">Participation Format</div></div>
+          <div class="pickle-stat"><div class="pickle-stat-num">28</div><div class="pickle-stat-label">December 2025</div></div>
+          <div class="pickle-stat"><div class="pickle-stat-num">Athrise</div><div class="pickle-stat-label">India Partner</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="pickle-img">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="pickle-img-text">Tournament Photos</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner">
+    <div class="cta-banner-text">BE PART OF<br>THE COMMUNITY.</div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="/#interns" class="btn btn-black">Apply as Intern</a>
+      <a href="/events"   class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3);">See Upcoming Runs</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/" class="footer-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="footer-copy">© 2026 All rights reserved.</div>
+    <div class="footer-tagline">Run Together.</div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+    });
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events — Elite Run</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    .page-hero {
+      background: var(--black);
+      padding: 80px var(--pad);
+    }
+    .page-hero-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
+      color: var(--red); text-transform: uppercase; margin-bottom: 16px;
+    }
+    .page-hero-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(64px, 9vw, 110px);
+      line-height: 0.90; letter-spacing: -0.01em;
+      text-transform: uppercase; color: #fff;
+    }
+    .page-hero-heading span { color: var(--red); }
+    .page-hero-sub {
+      font-size: 17px; color: #555; max-width: 480px;
+      line-height: 1.6; margin-top: 20px;
+    }
+
+    /* ── PAST EDITIONS ── */
+    .past-section { padding: 100px var(--pad); background: var(--bg); }
+    .past-section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(38px,5vw,58px);
+      line-height: 1; margin-bottom: 48px;
+    }
+    .edition-card {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; border: 1px solid var(--border);
+      border-radius: 3px; overflow: hidden; margin-bottom: 32px;
+      background: var(--white);
+    }
+    .edition-img {
+      width: 100%; height: 100%; min-height: 300px;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px;
+    }
+    .edition-img svg { width: 40px; height: 40px; opacity: 0.2; }
+    .edition-img-text {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); opacity: 0.5;
+    }
+    .edition-body { padding: 40px; }
+    .edition-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 80px; line-height: 0.85;
+      color: var(--border); letter-spacing: -0.03em; margin-bottom: 16px;
+    }
+    .edition-date {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .edition-location { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .edition-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 36px; line-height: 1;
+      margin-bottom: 14px;
+    }
+    .edition-desc { font-size: 15px; color: var(--muted); line-height: 1.7; margin-bottom: 24px; }
+    .edition-stats {
+      display: flex; gap: 28px; padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .edition-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 32px; color: var(--red); line-height: 1;
+    }
+    .edition-stat-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; color: var(--muted);
+      text-transform: uppercase; margin-top: 3px;
+    }
+
+    /* ── UPCOMING ── */
+    .upcoming-section { padding: 100px var(--pad); background: var(--white); }
+    .upcoming-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-end; margin-bottom: 16px;
+    }
+    .upcoming-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(38px, 5vw, 66px); line-height: 1;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--red); padding: 72px var(--pad);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 40px;
+    }
+    .cta-banner-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(36px,4vw,54px); color: #fff; line-height: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .edition-card { grid-template-columns: 1fr; }
+      .edition-img { min-height: 220px; }
+    }
+    @media (max-width: 768px) {
+      .past-section, .upcoming-section { padding: 64px var(--pad); }
+      .edition-stats { gap: 16px; flex-wrap: wrap; }
+      .cta-banner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/events" class="red">Events</a>
+      <a href="/story">Our Story</a>
+      <a href="/community">Community</a>
+      <a href="/sessions">Club Sessions</a>
+      <a href="/#interns">Interns</a>
+      <a href="/#contact">Contact</a>
+      <a href="/events" class="btn btn-red">Join a Run</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/events"    onclick="closeMobileNav()">Events</a>
+    <a href="/story"     onclick="closeMobileNav()">Our Story</a>
+    <a href="/community" onclick="closeMobileNav()">Community</a>
+    <a href="/sessions"  onclick="closeMobileNav()">Club Sessions</a>
+    <a href="/#interns"  onclick="closeMobileNav()">Interns</a>
+    <a href="/#contact"  onclick="closeMobileNav()">Contact</a>
+    <a href="/events"    onclick="closeMobileNav()" class="btn btn-red" style="width:fit-content">Join a Run</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-label">Events</div>
+    <h1 class="page-hero-heading">SHOW UP.<br><span>WE'LL PACE YOU.</span></h1>
+    <p class="page-hero-sub">From our first 5K in 2024 to 250+ runners on the streets — every edition is a milestone.</p>
+  </section>
+
+  <!-- PAST EDITIONS -->
+  <section class="past-section">
+    <div class="section-label">Past Editions</div>
+    <h2 class="past-section-heading">HOW FAR WE'VE COME</h2>
+
+    <!-- Edition 1 -->
+    <div class="edition-card">
+      <div class="edition-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+        <div class="edition-img-text">First Edition Photos</div>
+      </div>
+      <div class="edition-body">
+        <div class="edition-num">01</div>
+        <div class="edition-date">14 July 2024</div>
+        <div class="edition-location">Marine Drive, Lucknow</div>
+        <div class="edition-title">ELITE MARATHON '24</div>
+        <p class="edition-desc">The run that started it all. A 5K designed to encourage people to step away from routine inertia and reconnect with movement, discipline, and community. Pacers, water stations, and a curated hamper for every finisher.</p>
+        <div class="edition-stats">
+          <div><div class="edition-stat-num">5K</div><div class="edition-stat-label">Distance</div></div>
+          <div><div class="edition-stat-num">₹9K</div><div class="edition-stat-label">Prize Pool</div></div>
+          <div><div class="edition-stat-num">3</div><div class="edition-stat-label">Sponsors</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edition 2 -->
+    <div class="edition-card">
+      <div class="edition-img">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21,15 16,10 5,21"/>
+        </svg>
+        <div class="edition-img-text">Second Edition Photos</div>
+      </div>
+      <div class="edition-body">
+        <div class="edition-num">02</div>
+        <div class="edition-date">22 June 2025</div>
+        <div class="edition-location">Janeshwar Mishra Park, Gomti Nagar, Lucknow</div>
+        <div class="edition-title">ELITE 5K RUN '25</div>
+        <p class="edition-desc">The return of a movement. Built around Elite's central message — "Don't scroll your life away. Run it instead." — the Second Edition brought together nearly 250 runners from across the city and expanded both the scale and the community.</p>
+        <div class="edition-stats">
+          <div><div class="edition-stat-num">250+</div><div class="edition-stat-label">Runners</div></div>
+          <div><div class="edition-stat-num">₹9K</div><div class="edition-stat-label">Prize Pool</div></div>
+          <div><div class="edition-stat-num">6</div><div class="edition-stat-label">Sponsors</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UPCOMING RUNS -->
+  <section class="upcoming-section">
+    <div class="section-label">Upcoming Runs</div>
+    <div class="upcoming-header">
+      <h2 class="upcoming-heading">NEXT ON THE CALENDAR</h2>
+      <div class="events-count" id="events-count"></div>
+    </div>
+    <div id="events-list"><div class="loading">Loading upcoming runs…</div></div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div class="cta-banner-text">LACE UP.<br>YOUR NEXT RUN AWAITS.</div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="/#interns" class="btn btn-black">Apply as Intern</a>
+      <a href="/#contact" class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.3);">Get in Touch</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="/" class="footer-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="footer-copy">© 2026 All rights reserved.</div>
+    <div class="footer-tagline">Run Together.</div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+    });
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+
+    const MONTHS = ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+    const DAYS   = ['SUN','MON','TUE','WED','THU','FRI','SAT'];
+
+    async function loadEvents() {
+      try {
+        const res = await fetch('/api/events?upcoming=true');
+        const events = await res.json();
+        const list = document.getElementById('events-list');
+        const countEl = document.getElementById('events-count');
+        if (!events.length) {
+          list.innerHTML = '<div class="empty">No upcoming runs right now — check back soon.</div>';
+          return;
+        }
+        countEl.textContent = `${events.length} upcoming`;
+        list.innerHTML = events.map(e => {
+          const d = new Date(e.date);
+          const day = DAYS[d.getDay()];
+          const month = MONTHS[d.getMonth()];
+          const badge = e.difficulty ? `<span class="badge badge-${e.difficulty}">${e.difficulty}</span>` : '';
+          const spots = e.spots ? `<div class="ev-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>${e.spots} spots</div>` : '';
+          const dist = e.distance ? `<div class="ev-distance">${e.distance}</div>` : '';
+          return `
+            <div class="event-row">
+              <div class="ev-date">
+                <div class="ev-weekday">${day}</div>
+                <div class="ev-day">${d.getDate()}</div>
+                <div class="ev-month">${month} ${d.getFullYear()}</div>
+              </div>
+              <div class="ev-info">
+                <div class="ev-name">${e.name}</div>
+                <div class="ev-desc">${e.description || ''}</div>
+                <div class="ev-meta">
+                  ${dist}${badge}
+                  <div class="ev-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                    </svg>${e.location}
+                  </div>
+                  ${e.time ? `<div class="ev-meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${e.time}</div>` : ''}
+                  ${spots}
+                </div>
+              </div>
+              <div class="event-cta">
+                <a href="/#interns" class="btn btn-red">Register →</a>
+              </div>
+            </div>`;
+        }).join('');
+      } catch {
+        document.getElementById('events-list').innerHTML =
+          '<div class="empty">Could not load events — make sure the Flask server is running.</div>';
+      }
+    }
+    loadEvents();
+  </script>
+</body>
+</html>

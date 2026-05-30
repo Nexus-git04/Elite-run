@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — Elite Run</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    /* ── PAGE HERO ── */
+    .story-hero {
+      background: var(--black);
+      padding: 100px var(--pad) 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: end;
+    }
+    .story-hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .story-hero-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(64px, 9vw, 110px);
+      line-height: 0.90;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .story-hero-heading span { color: var(--red); }
+    .story-hero-right { padding-bottom: 10px; }
+    .story-hero-quote {
+      font-size: 22px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      border-left: 3px solid var(--red);
+      padding-left: 24px;
+      margin-bottom: 32px;
+    }
+    .story-hero-meta { display: flex; gap: 40px; }
+    .story-hero-meta-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 42px;
+      color: #fff;
+      line-height: 1;
+    }
+    .story-hero-meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      color: #555;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── CHAPTERS ── */
+    .chapter { padding: 100px var(--pad); border-bottom: 1px solid var(--border); }
+    .chapter-alt  { background: var(--white); }
+    .chapter-dark { background: var(--black); }
+    .chapter-inner {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .chapter-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 120px;
+      line-height: 0.85;
+      color: var(--border);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+    }
+    .chapter-dark .chapter-num { color: #1c1c1c; }
+    .chapter-date {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.14em; color: var(--red);
+      text-transform: uppercase; margin-bottom: 8px;
+    }
+    .chapter-location { font-size: 14px; color: var(--muted); line-height: 1.5; }
+    .chapter-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(40px, 5vw, 62px);
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+    .chapter-dark .chapter-heading { color: #fff; }
+    .chapter-body {
+      font-size: 17px; line-height: 1.7;
+      color: var(--muted); max-width: 620px; margin-bottom: 36px;
+    }
+    .chapter-dark .chapter-body { color: #666; }
+
+    /* ── IMAGE PLACEHOLDER ── */
+    .img-placeholder {
+      width: 100%; aspect-ratio: 16/9;
+      background: var(--border); border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 10px; margin-bottom: 36px;
+    }
+    .chapter-alt  .img-placeholder { background: #e8e5df; }
+    .chapter-dark .img-placeholder { background: #1a1a1a; }
+    .img-placeholder-icon { width: 40px; height: 40px; opacity: 0.25; }
+    .img-placeholder-text {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); opacity: 0.5;
+    }
+
+    /* ── HIGHLIGHTS ── */
+    .highlights-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 3px;
+      overflow: hidden; margin-bottom: 32px;
+    }
+    .chapter-dark .highlights-grid { background: #222; border-color: #222; }
+    .highlight-item { background: var(--bg); padding: 24px 20px; }
+    .chapter-alt  .highlight-item { background: var(--white); }
+    .chapter-dark .highlight-item { background: #111; }
+    .highlight-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 36px;
+      color: var(--red); line-height: 1; margin-bottom: 4px;
+    }
+    .highlight-label { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.4; }
+    .chapter-dark .highlight-label { color: #555; }
+
+    /* ── PRIZE LIST ── */
+    .prize-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .prize-item {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--white); border: 1px solid var(--border); border-radius: 3px;
+      font-size: 15px;
+    }
+    .chapter-dark .prize-item { background: #1a1a1a; border-color: #222; color: #fff; }
+    .prize-position { font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .prize-medal {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800; letter-spacing: 0.03em;
+    }
+    .medal-gold   { background: #FFF3CC; color: #B8860B; }
+    .medal-silver { background: #F0F0F0; color: #707070; }
+    .medal-bronze { background: #FFF0E8; color: #CD7F32; }
+    .prize-amount {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 22px; color: var(--red);
+    }
+
+    /* ── GROWTH SECTION ── */
+    .growth-section { background: var(--red); padding: 80px var(--pad); }
+    .growth-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .growth-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.16em; color: rgba(255,255,255,0.5);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .growth-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(48px,6vw,80px);
+      line-height: 0.92; color: #fff; margin-bottom: 20px;
+    }
+    .growth-body { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+    .growth-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2px; background: rgba(255,255,255,0.15);
+      border-radius: 4px; overflow: hidden;
+    }
+    .growth-stat { background: rgba(255,255,255,0.08); padding: 32px 28px; }
+    .growth-stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: 56px; color: #fff; line-height: 1; margin-bottom: 6px;
+    }
+    .growth-stat-label {
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 0.12em; color: rgba(255,255,255,0.5); text-transform: uppercase;
+    }
+
+    /* ── SPONSORS ── */
+    .sponsors-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+    .sponsor-tag {
+      padding: 7px 16px; border: 1px solid var(--border); border-radius: 3px;
+      font-size: 13px; font-weight: 600; color: var(--black); background: var(--white);
+    }
+    .chapter-dark .sponsor-tag { border-color: #2a2a2a; background: #1a1a1a; color: #aaa; }
+
+    /* ── HAMPER LIST ── */
+    .hamper-list { display: flex; flex-direction: column; gap: 8px; }
+    .hamper-item { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--muted); }
+    .chapter-dark .hamper-item { color: #666; }
+    .hamper-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
+
+    /* ── PHILOSOPHY ── */
+    .philosophy-section { padding: 100px var(--pad); background: var(--bg); text-align: center; }
+    .philosophy-quote {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(36px,5vw,64px);
+      line-height: 1.05; max-width: 800px;
+      margin: 0 auto 32px; letter-spacing: -0.01em;
+    }
+    .philosophy-quote span { color: var(--red); }
+    .philosophy-sub {
+      font-size: 17px; color: var(--muted);
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.7;
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: var(--black); padding: 72px var(--pad);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 40px;
+    }
+    .cta-banner-text {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900; font-size: clamp(36px,4vw,54px); color: #fff; line-height: 1;
+    }
+    .cta-banner-text span { color: var(--red); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .story-hero { grid-template-columns: 1fr; gap: 40px; }
+      .chapter-inner { grid-template-columns: 1fr; gap: 32px; }
+      .chapter-num { font-size: 80px; }
+      .growth-inner { grid-template-columns: 1fr; gap: 40px; }
+      .cta-banner { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 768px) {
+      .story-hero { padding: 60px var(--pad) 52px; }
+      .story-hero-meta { gap: 24px; flex-wrap: wrap; }
+      .chapter { padding: 64px var(--pad); }
+      .highlights-grid { grid-template-columns: 1fr 1fr; }
+      .growth-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/" class="nav-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="nav-links">
+      <a href="/#events">Events</a>
+      <a href="/story" class="red">Our Story</a>
+      <a href="/#shop">Shop</a>
+      <a href="/#interns">Interns</a>
+      <a href="/#contact">Contact</a>
+      <a href="/#events" class="btn btn-red">Join a Run</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="/#events"  onclick="closeMobileNav()">Events</a>
+    <a href="/story"    onclick="closeMobileNav()">Our Story</a>
+    <a href="/#shop"    onclick="closeMobileNav()">Shop</a>
+    <a href="/#interns" onclick="closeMobileNav()">Interns</a>
+    <a href="/#contact" onclick="closeMobileNav()">Contact</a>
+    <a href="/#events"  onclick="closeMobileNav()" class="btn btn-red" style="width:fit-content">Join a Run</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <section class="story-hero">
+    <div>
+      <div class="story-hero-label">Our Story</div>
+      <h1 class="story-hero-heading">MILES INTO<br><span>MEMORIES.</span></h1>
+    </div>
+    <div class="story-hero-right">
+      <p class="story-hero-quote">"Don't scroll your life away.<br>Run it instead."</p>
+      <div class="story-hero-meta">
+        <div><div class="story-hero-meta-num">2024</div><div class="story-hero-meta-label">Founded</div></div>
+        <div><div class="story-hero-meta-num">250+</div><div class="story-hero-meta-label">Runners</div></div>
+        <div><div class="story-hero-meta-num">2</div><div class="story-hero-meta-label">Editions</div></div>
+        <div><div class="story-hero-meta-num">15</div><div class="story-hero-meta-label">Sessions</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 1 — FIRST EDITION -->
+  <section class="chapter">
+    <div class="chapter-inner">
+      <div>
+        <div class="chapter-num">01</div>
+        <div class="chapter-date">14 July 2024</div>
+        <div class="chapter-location">Marine Drive<br>Lucknow</div>
+      </div>
+      <div class="chapter-content">
+        <div class="section-label">First Edition — Elite Marathon '24</div>
+        <h2 class="chapter-heading">WHERE IT ALL BEGAN</h2>
+        <div class="img-placeholder">
+          <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="img-placeholder-text">First Edition Photos</div>
+        </div>
+        <p class="chapter-body">The First Edition marked the beginning of what would later evolve into the Elite Run club. Designed as more than just a competitive run, the event was created to encourage people to step away from routine inertia and reconnect with movement, discipline, and community. The 5K route consisted of two laps of 2.5 kilometres, with mini water stations and checkpoints placed across the course.</p>
+        <div class="highlights-grid">
+          <div class="highlight-item"><div class="highlight-num">5K</div><div class="highlight-label">Route Distance</div></div>
+          <div class="highlight-item"><div class="highlight-num">2</div><div class="highlight-label">Laps of 2.5 KM</div></div>
+          <div class="highlight-item"><div class="highlight-num">₹9K</div><div class="highlight-label">Prize Pool</div></div>
+        </div>
+        <div class="prize-list">
+          <div class="prize-item"><div class="prize-position"><div class="prize-medal medal-gold">1st</div>First Place</div><div class="prize-amount">₹5,000</div></div>
+          <div class="prize-item"><div class="prize-position"><div class="prize-medal medal-silver">2nd</div>Second Place</div><div class="prize-amount">₹3,000</div></div>
+          <div class="prize-item"><div class="prize-position"><div class="prize-medal medal-bronze">3rd</div>Third Place</div><div class="prize-amount">₹1,000</div></div>
+        </div>
+        <p class="chapter-body" style="margin-bottom:16px;">Every registered runner received:</p>
+        <div class="hamper-list" style="margin-bottom:28px;">
+          <div class="hamper-item"><div class="hamper-dot"></div>Official Elite Marathon '24 T-shirt</div>
+          <div class="hamper-item"><div class="hamper-dot"></div>Custom Elite Marathon '24 Medal</div>
+          <div class="hamper-item"><div class="hamper-dot"></div>Refreshment Boxes</div>
+        </div>
+        <p class="chapter-body" style="margin-bottom:12px;">Supported by</p>
+        <div class="sponsors-row">
+          <div class="sponsor-tag">Decathlon Vibhuti Khand</div>
+          <div class="sponsor-tag">Daylite</div>
+          <div class="sponsor-tag">Bonn</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROWTH SECTION -->
+  <section class="growth-section">
+    <div class="growth-inner">
+      <div>
+        <div class="growth-label">Season 1 — Club Sessions</div>
+        <h2 class="growth-heading">FROM 6<br>TO 103.</h2>
+        <p class="growth-body">On 22nd September 2024, Elite Run Club conducted its first official club session at Botanical Garden, Lucknow, with just 6 runners. What began as a small gathering gradually developed into a steadily growing community. By Week 15 on 18th May 2025, attendance had grown to 103 participants — a movement built one session at a time.</p>
+      </div>
+      <div class="growth-stats">
+        <div class="growth-stat"><div class="growth-stat-num">6</div><div class="growth-stat-label">Week 1 Runners</div></div>
+        <div class="growth-stat"><div class="growth-stat-num">103</div><div class="growth-stat-label">Week 15 Runners</div></div>
+        <div class="growth-stat"><div class="growth-stat-num">15</div><div class="growth-stat-label">Sessions</div></div>
+        <div class="growth-stat"><div class="growth-stat-num">8mo</div><div class="growth-stat-label">Growth Period</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHAPTER 2 — SECOND EDITION -->
+  <section class="chapter chapter-alt">
+    <div class="chapter-inner">
+      <div>
+        <div class="chapter-num">02</div>
+        <div class="chapter-date">22 June 2025</div>
+        <div class="chapter-location">Janeshwar Mishra Park<br>Gomti Nagar, Lucknow</div>
+      </div>
+      <div class="chapter-content">
+        <div class="section-label">Second Edition — Elite 5K Run '25</div>
+        <h2 class="chapter-heading">THE RETURN OF A MOVEMENT</h2>
+        <div class="img-placeholder">
+          <svg class="img-placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21,15 16,10 5,21"/>
+          </svg>
+          <div class="img-placeholder-text">Second Edition Photos</div>
+        </div>
+        <p class="chapter-body">The Second Edition brought together nearly 250 runners from across the city for a morning that combined endurance, community, and impact. What began as a single run in 2024 had now evolved into a recognised youth-led platform where fitness became a shared experience rather than an individual pursuit.</p>
+        <div class="highlights-grid">
+          <div class="highlight-item"><div class="highlight-num">250+</div><div class="highlight-label">Runners</div></div>
+          <div class="highlight-item"><div class="highlight-num">Top 15</div><div class="highlight-label">Received Exclusive Goodies</div></div>
+          <div class="highlight-item"><div class="highlight-num">₹9K</div><div class="highlight-label">Prize Pool</div></div>
+        </div>
+        <div class="prize-list">
+          <div class="prize-item"><div class="prize-position"><div class="prize-medal medal-gold">1st</div>First Place</div><div class="prize-amount">₹5,000</div></div>
+          <div class="prize-item"><div class="prize-position"><div class="prize-medal medal-silver">2nd</div>Second Place</div><div class="prize-amount">₹3,000</div></div>
+          <div class="prize-item"><div class="prize-position"><div class="prize-medal medal-bronze">3rd</div>Third Place</div><div class="prize-amount">₹1,000</div></div>
+        </div>
+        <p class="chapter-body" style="margin-bottom:16px;">Every participant received:</p>
+        <div class="hamper-list" style="margin-bottom:28px;">
+          <div class="hamper-item"><div class="hamper-dot"></div>Official Elite 5K Run '25 T-shirt</div>
+          <div class="hamper-item"><div class="hamper-dot"></div>Finisher Medals</div>
+          <div class="hamper-item"><div class="hamper-dot"></div>Participation Certificates</div>
+          <div class="hamper-item"><div class="hamper-dot"></div>Refreshment Boxes</div>
+          <div class="hamper-item"><div class="hamper-dot"></div>Exclusive goodies worth ₹1,000+ for Top 15</div>
+        </div>
+        <p class="chapter-body" style="margin-bottom:12px;">Sponsors & Partners</p>
+        <div class="sponsors-row">
+          <div class="sponsor-tag">Lucknow Falcons — Prime Sponsor</div>
+          <div class="sponsor-tag">Decathlon Vibhuti Khand</div>
+          <div class="sponsor-tag">Knock Sense — Outreach Partner</div>
+          <div class="sponsor-tag">Danbro Aliganj</div>
+          <div class="sponsor-tag">CM Yuva Yojna — Youth Partner</div>
+          <div class="sponsor-tag">Mouth Wide Shut — Women's Category</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHILOSOPHY -->
+  <section class="philosophy-section">
+    <div class="section-label" style="text-align:center">Our Philosophy</div>
+    <h2 class="philosophy-quote">TURN MILES<br>INTO <span>MEMORIES.</span></h2>
+    <p class="philosophy-sub">Elite Run Club was built on a simple idea — that movement creates community, and community creates meaning. Every run, every session, every finish line is a shared moment that outlasts the distance covered.</p>
+    <a href="/#events" class="btn btn-black">See Upcoming Runs →</a>
+  </section>
+
+  <!-- CTA BANNER -->
+  <div class="cta-banner">
+    <div class="cta-banner-text">READY TO BE<br>PART OF THE <span>STORY?</span></div>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="/#interns" class="btn btn-red">Apply as Intern</a>
+      <a href="/#events"  class="btn btn-outline" style="color:#fff;border-color:#333;">Join a Run</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="/" class="footer-logo">
+      <img src="/static/logo.jpg" alt="Elite Club" class="nav-logo-img" />
+    </a>
+    <div class="footer-copy">© 2026 All rights reserved.</div>
+    <div class="footer-tagline">Run Together.</div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobile-nav');
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+    });
+    function closeMobileNav() {
+      mobileNav.classList.remove('open');
+      hamburger.classList.remove('open');
+    }
+  </script>
+</body>
+</html>

@@ -156,7 +156,21 @@ def seed_db():
 def home():
     return render_template("index.html")
 
+@app.route("/story")
+def story():
+    return render_template("story.html")
 
+@app.route("/community")
+def community():
+    return render_template("community.html")
+
+@app.route("/events")
+def events():
+    return render_template("events.html")
+
+@app.route("/sessions")
+def sessions():
+    return render_template("sessions.html")
 # ─────────────────────────────────────────
 #  API — Events
 # ─────────────────────────────────────────
